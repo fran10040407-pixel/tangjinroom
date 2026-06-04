@@ -9,5 +9,5 @@ data = {
 }
 
 response = requests.post(url, data=data)
-print("=== 발급된 카카오 토큰 정보 ===")
+print("jzO9zc-JjlBXWDSWBcIohGZ6Era8ahRsyKDZmzy0dKt6BG1QJg6u-QAAAAQKFzVXAAABnpA5A3xPBWDH3LuH7A")
 print(response.text)
