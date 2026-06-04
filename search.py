@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 # --- 다중 검색 조건 설정 ---
 SEARCH_TARGETS = [
     {"keyword": "ジョニーウォーカー ブラック 金キャップ 特級", "max_price": 4000},
-    {"keyword": "ジョニーウォーカー ブラック 半金キャップ 特級", "max_price": 3000}
+    {"keyword": "ジョニーウォーカー ブラックラベル 黒金キャップ", "max_price": 3000}
 ]
 
 def send_kakao_message(text):
@@ -43,8 +43,6 @@ def search_yahoo_auction():
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
     }
-    
-    message_content = ""
 
     for target in SEARCH_TARGETS:
         keyword = target["keyword"]
@@ -69,16 +67,25 @@ def search_yahoo_auction():
                 
                 if price <= max_price:
                     found_items.append({"title": title, "price": price, "link": link})
-            except Exception as e:
-                continue
+                except Exception as e:
+                    continue
 
         if found_items:
             print(f"🎉 조건에 맞는 매물을 {len(found_items)}개 찾았습니다!")
-            message_content += f"\n[{keyword}]\n"
             
-            # 카카오톡 메시지 길이 제한을 방지하기 위해 상위 5개만 알림에 포함
-            for idx, item in enumerate(found_items[:5], 1):
-                message_content += f"{idx}. {item['price']}엔\n{item['link']}\n"
+            # 카카오톡 글자 수 제한(400자)을 넘지 않도록 4개씩 나누어 전송
+            chunk_size = 4
+            total_chunks = ((len(found_items) - 1) // chunk_size) + 1
+            
+            for i in range(0, len(found_items), chunk_size):
+                chunk = found_items[i:i+chunk_size]
+                current_page = (i // chunk_size) + 1
+                message_content = f"[{keyword} 알림 ({current_page}/{total_chunks})]\n"
+                
+                for idx, item in enumerate(chunk, i + 1):
+                    message_content += f"{idx}. {item['price']}엔\n{item['link']}\n"
+                
+                send_kakao_message(message_content)
                 
             for idx, item in enumerate(found_items, 1):
                 print(f"  {idx}. {item['title']}")
@@ -87,11 +94,6 @@ def search_yahoo_auction():
         else:
             print("현재 설정한 금액 이하의 매물이 없습니다.")
         print("-" * 50 + "\n")
-
-    if message_content:
-        send_kakao_message("야후 옥션 매물 알림" + message_content)
-    else:
-        print("전송할 새 매물이 없습니다.")
 
 if __name__ == "__main__":
     search_yahoo_auction()
