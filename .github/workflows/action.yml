@@ -2,7 +2,7 @@ name: Yahoo Auction Search Bot
 
 on:
   schedule:
-    - cron: '0 * * * *' # 1시간마다(매 정시) 자동 실행
+    - cron: '0 9,23 * * *'
   workflow_dispatch: # 수동으로 즉시 실행해 볼 수 있는 버튼 추가
 
 jobs:
