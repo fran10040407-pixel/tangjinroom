@@ -1,0 +1,27 @@
+name: Yahoo Auction Search Bot
+
+on:
+  schedule:
+    - cron: '0 * * * *' # 1시간마다(매 정시) 자동 실행
+  workflow_dispatch: # 수동으로 즉시 실행해 볼 수 있는 버튼 추가
+
+jobs:
+  run-search:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 저장소 코드 불러오기
+      uses: actions/checkout@v3
+
+    - name: 파이썬 환경 설정
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: 필요한 라이브러리 설치
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: 야후 옥션 검색 코드 실행
+      run: python search.py
