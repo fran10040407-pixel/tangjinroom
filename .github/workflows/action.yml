@@ -24,4 +24,4 @@ jobs:
         pip install -r requirements.txt
 
     - name: 야후 옥션 검색 코드 실행
-      run: python get_token.py
+      run: python search.py
