@@ -5,14 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>야후 옥션 술 검색</title>
     <style>
-        body { font-family: sans-serif; padding: 20px; background-color: #f4f4f9; }
-        h2 { text-align: center; color: #333; }
+        /* 화면 밖으로 삐져나가는 문제 해결 */
+        * { box-sizing: border-box; } 
+        body { font-family: sans-serif; padding: 20px; background-color: #f4f4f9; margin: 0; }
+        h2 { text-align: center; color: #333; margin-top: 10px; }
         .btn {
             display: block; width: 100%; padding: 15px; margin-bottom: 10px;
             background-color: #fee500; color: #000; text-align: center;
             text-decoration: none; font-weight: bold; border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
     </style>
+    <script>
+        // 카카오톡에서 클릭 시 자동으로 외부 브라우저(크롬 등)로 열게 하는 코드
+        var useragt = navigator.userAgent.toLowerCase();
+        var target_url = location.href;
+        
+        if(useragt.match(/kakaotalk/i)){
+            location.href = 'kakaotalk://web/openExternal?url=' + encodeURIComponent(target_url);
+        }
+    </script>
 </head>
 <body>
     <h2>🥃 술 검색 목록</h2>
