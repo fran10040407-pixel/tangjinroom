@@ -1,8 +1,11 @@
 import requests
-import json
 import re
 import datetime
 from bs4 import BeautifulSoup
+
+# --- 텔레그램 봇 설정 ---
+TELEGRAM_TOKEN = '8943457065:AAGDqMYtX-ZglWavdSB1P3f7w3EctJB975o'
+TELEGRAM_CHAT_ID = '-1004505085448'
 
 # --- 다중 검색 조건 설정 ---
 SEARCH_TARGETS = [
@@ -10,34 +13,21 @@ SEARCH_TARGETS = [
     {"keyword": "ジョニーウォーカー ブラックラベル 黒金キャップ", "max_price": 3000}
 ]
 
-def send_kakao_message(text):
-    try:
-        with open("kakao_token.json", "r") as fp:
-            tokens = json.load(fp)
-            access_token = tokens["access_token"]
-    except FileNotFoundError:
-        print("카카오 토큰 파일이 없습니다.")
-        return
-
-    url = "https://kapi.kakao.com/v2/api/talk/memo/default/send"
-    headers = {
-        "Authorization": f"Bearer {access_token}"
-    }
+def send_telegram_message(text):
+    url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
     data = {
-        "template_object": json.dumps({
-            "object_type": "text",
-            "text": text,
-            "link": {
-                "web_url": "https://auctions.yahoo.co.jp/",
-                "mobile_web_url": "https://auctions.yahoo.co.jp/"
-            }
-        })
+        "chat_id": TELEGRAM_CHAT_ID,
+        "text": text,
+        "disable_web_page_preview": True  # 긴 링크 미리보기 방지
     }
-    response = requests.post(url, headers=headers, data=data)
-    if response.json().get('result_code') == 0:
-        print("카카오톡 메시지를 성공적으로 보냈습니다.")
-    else:
-        print(f"카카오톡 메시지 전송 실패: {response.text}")
+    try:
+        response = requests.post(url, data=data)
+        if response.status_code == 200:
+            print("텔레그램 메시지를 성공적으로 보냈습니다.")
+        else:
+            print(f"텔레그램 메시지 전송 실패: {response.text}")
+    except Exception as e:
+        print(f"텔레그램 전송 중 에러 발생: {e}")
 
 def search_yahoo_auction():
     print("=== 일본 야후 옥션 주류 카테고리 검색 시작 ===\n")
@@ -133,9 +123,9 @@ def search_yahoo_auction():
                 chunk_message = f"[{keyword} 알림 ({current_page}/{total_chunks})]\n"
                 
                 for idx, item in enumerate(chunk, i + 1):
-                    chunk_message += f"{idx}. {item['price']}엔{item['label']} ({item['time']})\n{item['link']}\n"
+                    chunk_message += f"{idx}. {item['price']}엔{item['label']} ({item['time']})\n{item['link']}\n\n"
                 
-                send_kakao_message(chunk_message)
+                send_telegram_message(chunk_message)
                 
             for idx, item in enumerate(found_items, 1):
                 print(f"  {idx}. {item['title']}")
