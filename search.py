@@ -4,7 +4,7 @@ import datetime
 from bs4 import BeautifulSoup
 
 # --- 텔레그램 봇 설정 ---
-TELEGRAM_TOKEN ='8943457065:AAGDqMYtX-ZglWavdSB1P3f7w3EctJB975o'
+TELEGRAM_TOKEN ='8943457065:AAFGMxMWR4Ivj99XXSvTRwfInskz-2f-0Vs'
 TELEGRAM_CHAT_ID ='-1004505085448'
 
 # --- 다중 검색 조건 설정 ---
