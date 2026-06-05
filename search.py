@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 # --- 텔레그램 봇 설정 ---
 TELEGRAM_TOKEN ='8943457065:AAFGMxMWR4Ivj99XXSvTRwfInskz-2f-0Vs'
-TELEGRAM_CHAT_ID ='-1004505085448'
+TELEGRAM_CHAT_ID ='-5298296449'
 
 # --- 다중 검색 조건 설정 ---
 SEARCH_TARGETS = [
