@@ -9,11 +9,40 @@
         * { box-sizing: border-box; } 
         body { font-family: sans-serif; padding: 20px; background-color: #f4f4f9; margin: 0; }
         h2 { text-align: center; color: #333; margin-top: 10px; }
+        
+        /* 버튼을 나란히 배치하기 위한 컨테이너 */
+        .btn-group {
+            display: flex;
+            gap: 8px; /* 버튼 사이 간격 */
+            margin-bottom: 10px;
+        }
+        
+        /* 공통 버튼 스타일 */
         .btn {
-            display: block; width: 100%; padding: 15px; margin-bottom: 10px;
-            background-color: #fee500; color: #000; text-align: center;
-            text-decoration: none; font-weight: bold; border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            color: #000;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            word-break: keep-all; /* 텍스트 줄바꿈 방지 */
+        }
+
+        /* 기존 검색 버튼 (가로 비율 약 70%) */
+        .btn-search {
+            flex: 7;
+            background-color: #fee500;
+        }
+
+        /* 평균단가 확인 버튼 (가로 비율 약 30%) */
+        .btn-avg {
+            flex: 3;
+            background-color: #e0e0e0; /* 시각적 구분을 위한 색상 변경 */
+            font-size: 0.9em;
         }
     </style>
     <script>
@@ -28,22 +57,90 @@
 </head>
 <body>
     <h2>🥃 술 검색 목록</h2>
-    <a href="https://auctions.yahoo.co.jp/search/search?p=グレンエルギン&auccat=2084006720&s1=end&o1=a" class="btn">글렌엘긴 (グレンエルギン)</a>
-    <a href="https://auctions.yahoo.co.jp/search/search?p=カミュ&auccat=2084006720&s1=end&o1=a" class="btn">까뮤 (カミュ)</a>
-    <a href="https://auctions.yahoo.co.jp/search/search?p=コシュ・デュリ&auccat=2084006720&s1=end&o1=a" class="btn">코슈 듀리 (コシュ・デュリ)</a>
-    <a href="https://auctions.yahoo.co.jp/search/search?p=ロングロウ&auccat=2084006720&s1=end&o1=a" class="btn">롱로우 (ロングロウ)</a>
-    <a href="https://auctions.yahoo.co.jp/search/search?p=マーテル コルドンブルー&auccat=2084006720&s1=end&o1=a" class="btn">마텔코르돈 (マーテル コルドンブルー)</a>
-    <a href="https://auctions.yahoo.co.jp/search/search?p=マッカラン&auccat=2084006720&s1=end&o1=a" class="btn">맥캘란 (マッカラン)</a>
-    <a href="https://auctions.yahoo.co.jp/search/search?p=バランタイン&auccat=2084006720&s1=end&o1=a" class="btn">발렌타인 (バランタイン)</a>
-    <a href="https://auctions.yahoo.co.jp/search/search?p=サッシカイア 2021&auccat=2084006720&s1=end&o1=a" class="btn">사시까이아 2021 (サッシカイア 2021)</a>
-    <a href="https://auctions.yahoo.co.jp/search/search?p=スプリングバンク&auccat=2084006720&s1=end&o1=a" class="btn">스프링뱅크 (スプリングバンク)</a>
-    <a href="https://auctions.yahoo.co.jp/search/search?p=オールデスト&auccat=2084006720&s1=end&o1=a" class="btn">올디스트 (オールデスト)</a>
-    <a href="https://auctions.yahoo.co.jp/search/search?p=うぶすな&auccat=2084006720&s1=end&o1=a" class="btn">우부스나 (うぶすな)</a>
-    <a href="https://auctions.yahoo.co.jp/search/search?p=ジョニーウォーカー ブルーラベル&auccat=2084006720&s1=end&o1=a" class="btn">조니워커 블루라벨</a>
-    <a href="https://auctions.yahoo.co.jp/search/search?p=ジョセフィーヌ&auccat=2084006720&s1=end&o1=a" class="btn">조세핀 (ジョセフィーヌ)</a>
-    <a href="https://auctions.yahoo.co.jp/search/search?p=十四代&auccat=2084006720&s1=end&o1=a" class="btn">주욘다이 (十四代)</a>
-    <a href="https://auctions.yahoo.co.jp/search/search?p=カティ・サーク&auccat=2084006720&s1=end&o1=a" class="btn">카티삭 (カティ・サーク)</a>
-    <a href="https://auctions.yahoo.co.jp/search/search?p=プレミア&auccat=2084006720&s1=end&o1=a" class="btn">프리미어 (プレミア)</a>
-    <a href="https://auctions.yahoo.co.jp/search/search?p=ヘーゼルバーン&auccat=2084006720&s1=end&o1=a" class="btn">헤이즐번 (ヘーゼルバーン)</a>
+    
+    <div class="btn-group">
+        <a href="https://auctions.yahoo.co.jp/search/search?p=グレンエルギン&auccat=2084006720&s1=end&o1=a" class="btn btn-search">글렌엘긴 (グレンエルギン)</a>
+        <a href="https://auctions.yahoo.co.jp/closedsearch/closedsearch?p=グレンエルギン&auccat=2084006720" class="btn btn-avg">평균단가 확인</a>
+    </div>
+    
+    <div class="btn-group">
+        <a href="https://auctions.yahoo.co.jp/search/search?p=カミュ&auccat=2084006720&s1=end&o1=a" class="btn btn-search">까뮤 (カミュ)</a>
+        <a href="https://auctions.yahoo.co.jp/closedsearch/closedsearch?p=カミュ&auccat=2084006720" class="btn btn-avg">평균단가 확인</a>
+    </div>
+
+    <div class="btn-group">
+        <a href="https://auctions.yahoo.co.jp/search/search?p=コシュ・デュリ&auccat=2084006720&s1=end&o1=a" class="btn btn-search">코슈 듀리 (コシュ・デュリ)</a>
+        <a href="https://auctions.yahoo.co.jp/closedsearch/closedsearch?p=コシュ・デュリ&auccat=2084006720" class="btn btn-avg">평균단가 확인</a>
+    </div>
+
+    <div class="btn-group">
+        <a href="https://auctions.yahoo.co.jp/search/search?p=ロングロウ&auccat=2084006720&s1=end&o1=a" class="btn btn-search">롱로우 (ロングロウ)</a>
+        <a href="https://auctions.yahoo.co.jp/closedsearch/closedsearch?p=ロングロウ&auccat=2084006720" class="btn btn-avg">평균단가 확인</a>
+    </div>
+
+    <div class="btn-group">
+        <a href="https://auctions.yahoo.co.jp/search/search?p=マーテル コルドンブルー&auccat=2084006720&s1=end&o1=a" class="btn btn-search">마텔코르돈 (マーテル コルドンブルー)</a>
+        <a href="https://auctions.yahoo.co.jp/closedsearch/closedsearch?p=マーテル コルドンブルー&auccat=2084006720" class="btn btn-avg">평균단가 확인</a>
+    </div>
+
+    <div class="btn-group">
+        <a href="https://auctions.yahoo.co.jp/search/search?p=マッカラン&auccat=2084006720&s1=end&o1=a" class="btn btn-search">맥캘란 (マッカラン)</a>
+        <a href="https://auctions.yahoo.co.jp/closedsearch/closedsearch?p=マッカラン&auccat=2084006720" class="btn btn-avg">평균단가 확인</a>
+    </div>
+
+    <div class="btn-group">
+        <a href="https://auctions.yahoo.co.jp/search/search?p=バランタイン&auccat=2084006720&s1=end&o1=a" class="btn btn-search">발렌타인 (バランタイン)</a>
+        <a href="https://auctions.yahoo.co.jp/closedsearch/closedsearch?p=バランタイン&auccat=2084006720" class="btn btn-avg">평균단가 확인</a>
+    </div>
+
+    <div class="btn-group">
+        <a href="https://auctions.yahoo.co.jp/search/search?p=サッシカイア 2021&auccat=2084006720&s1=end&o1=a" class="btn btn-search">사시까이아 2021 (サッシカイア 2021)</a>
+        <a href="https://auctions.yahoo.co.jp/closedsearch/closedsearch?p=サッシカイア 2021&auccat=2084006720" class="btn btn-avg">평균단가 확인</a>
+    </div>
+
+    <div class="btn-group">
+        <a href="https://auctions.yahoo.co.jp/search/search?p=スプリングバンク&auccat=2084006720&s1=end&o1=a" class="btn btn-search">스프링뱅크 (スプリングバンク)</a>
+        <a href="https://auctions.yahoo.co.jp/closedsearch/closedsearch?p=スプリングバンク&auccat=2084006720" class="btn btn-avg">평균단가 확인</a>
+    </div>
+
+    <div class="btn-group">
+        <a href="https://auctions.yahoo.co.jp/search/search?p=オールデスト&auccat=2084006720&s1=end&o1=a" class="btn btn-search">올디스트 (オールデスト)</a>
+        <a href="https://auctions.yahoo.co.jp/closedsearch/closedsearch?p=オールデスト&auccat=2084006720" class="btn btn-avg">평균단가 확인</a>
+    </div>
+
+    <div class="btn-group">
+        <a href="https://auctions.yahoo.co.jp/search/search?p=うぶすな&auccat=2084006720&s1=end&o1=a" class="btn btn-search">우부스나 (うぶすな)</a>
+        <a href="https://auctions.yahoo.co.jp/closedsearch/closedsearch?p=うぶすな&auccat=2084006720" class="btn btn-avg">평균단가 확인</a>
+    </div>
+
+    <div class="btn-group">
+        <a href="https://auctions.yahoo.co.jp/search/search?p=ジョニーウォーカー ブルーラベル&auccat=2084006720&s1=end&o1=a" class="btn btn-search">조니워커 블루라벨</a>
+        <a href="https://auctions.yahoo.co.jp/closedsearch/closedsearch?p=ジョニーウォーカー ブルーラベル&auccat=2084006720" class="btn btn-avg">평균단가 확인</a>
+    </div>
+
+    <div class="btn-group">
+        <a href="https://auctions.yahoo.co.jp/search/search?p=ジョセフィーヌ&auccat=2084006720&s1=end&o1=a" class="btn btn-search">조세핀 (ジョセフィーヌ)</a>
+        <a href="https://auctions.yahoo.co.jp/closedsearch/closedsearch?p=ジョセフィーヌ&auccat=2084006720" class="btn btn-avg">평균단가 확인</a>
+    </div>
+
+    <div class="btn-group">
+        <a href="https://auctions.yahoo.co.jp/search/search?p=十四代&auccat=2084006720&s1=end&o1=a" class="btn btn-search">주욘다이 (十四代)</a>
+        <a href="https://auctions.yahoo.co.jp/closedsearch/closedsearch?p=十四代&auccat=2084006720" class="btn btn-avg">평균단가 확인</a>
+    </div>
+
+    <div class="btn-group">
+        <a href="https://auctions.yahoo.co.jp/search/search?p=カティ・サーク&auccat=2084006720&s1=end&o1=a" class="btn btn-search">카티삭 (カティ・サーク)</a>
+        <a href="https://auctions.yahoo.co.jp/closedsearch/closedsearch?p=カティ・サーク&auccat=2084006720" class="btn btn-avg">평균단가 확인</a>
+    </div>
+
+    <div class="btn-group">
+        <a href="https://auctions.yahoo.co.jp/search/search?p=プレミア&auccat=2084006720&s1=end&o1=a" class="btn btn-search">프리미어 (プレミア)</a>
+        <a href="https://auctions.yahoo.co.jp/closedsearch/closedsearch?p=プレミア&auccat=2084006720" class="btn btn-avg">평균단가 확인</a>
+    </div>
+
+    <div class="btn-group">
+        <a href="https://auctions.yahoo.co.jp/search/search?p=ヘーゼルバーン&auccat=2084006720&s1=end&o1=a" class="btn btn-search">헤이즐번 (ヘーゼルバーン)</a>
+        <a href="https://auctions.yahoo.co.jp/closedsearch/closedsearch?p=ヘーゼルバーン&auccat=2084006720" class="btn btn-avg">평균단가 확인</a>
+    </div>
 </body>
 </html>
