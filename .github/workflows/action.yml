@@ -2,7 +2,8 @@ name: Yahoo Auction Search Bot
 
 on:
   schedule:
-    - cron: '0 9,23 * * *'
+    - cron: '17 23 * * *'  # 한국 시간 오전 8시 17분
+    - cron: '22 8 * * *'   # 한국 시간 오후 5시 22분
   workflow_dispatch: # 수동으로 즉시 실행해 볼 수 있는 버튼 추가
 
 jobs:
